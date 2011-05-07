@@ -1,6 +1,6 @@
 # basic puppet
 
-class lucid32 {
+class web {
   package { "nginx":
     ensure => present,
   }
@@ -11,4 +11,4 @@ class lucid32 {
   }
 }
 
-include lucid32
+include web
