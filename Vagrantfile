@@ -1,8 +1,13 @@
 Vagrant::Config.run do |config|
-  config.vm.box = "lucid32"
-  config.vm.network "33.33.33.10"
-
-  # config.vm.forward_port "http", 80, 8080
+  config.vm.define :web do |web_config|
+    web_config.vm.box = "lucid32"
+    web_config.vm.network "33.33.33.10"
+    web_config.vm.provision :puppet
+  end
   
-  config.vm.provision :puppet
+  config.vm.define :db do |db_config|
+    db_config.vm.box = "lucid32"
+    db_config.vm.network "33.33.33.11"
+    db_config.vm.provision :puppet
+  end
 end
