@@ -1,10 +1,12 @@
 class nginx {
 	package { nginx: ensure => installed }
-
-    # Create the server as a virtual resource, so config instances
-    # can enable it.
-    @service { nginx:
-        ensure => running,
-        enable => true
-    }
+	service { nginx:
+		ensure => running,
+		enable => true
+	}
+	file {"/etc/nginx/nginx.conf":
+		content => template("nginx/nginx.conf.erb"),
+		require => Package["nginx"],
+		notify => Service["nginx"]
+	}
 }
